@@ -1,0 +1,16 @@
+schemaVersion: "1"
+kind: mixin
+name: ai-eval
+displayName: AI Evaluation Kit
+description: Adds lightweight Python tooling and evaluation guidance for repeatable AI evaluation workflows.
+
+commands:
+  install:
+    - command: "pip install pytest pandas"
+      user: "1000"
+      description: "Install lightweight evaluation tooling"
+
+  startup:
+    - command: ["sh", "-c", "cat AGENTS.md >> CLAUDE.md 2>/dev/null || true"]
+      user: "1000"
+      description: "Append AI evaluation guidance for compatible agents"

@@ -37,4 +37,4 @@ The initial focus is simple: make evaluation workflows more repeatable before ta
 
 ## Status
 
-Early prototype focused on reproducible AI evaluation environments.
+Version 0.1 prototype focused on reproducible AI agent evaluation environments.

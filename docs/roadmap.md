@@ -28,6 +28,10 @@ Project foundation and design phase.
 
 Evaluation workflow improvements.
 
+- Add an end-to-end reproducible agent evaluation example
+- Document fixed dependency strategy
+- Add simple artifact capture guidance
+
 ### Planned
 
 * Example benchmark configurations

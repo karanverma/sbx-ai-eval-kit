@@ -6,7 +6,7 @@ description: Adds lightweight Python tooling and evaluation guidance for repeata
 
 commands:
   install:
-    - command: "pip install pytest pandas"
+    - command: "pip install -r requirements.txt"
       user: "1000"
       description: "Install lightweight evaluation tooling"
 

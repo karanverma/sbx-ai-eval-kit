@@ -17,14 +17,14 @@ The initial focus is simple: make evaluation workflows more repeatable before ta
 - Evaluation-focused agent instructions
 - Repeatable baseline vs. candidate workflows
 - Clear documentation of observations, failures, and limitations
-- Alignment with AI safety and governance practices
+- Support evaluation workflows informed by AI safety and governance practices
 
 ## What This Kit Provides
 
 - SBX Mixin Kit configuration
 - AGENTS.md evaluation guidance
 - Sample evaluation workflow
-- Lightweight reproducibility notes
+- Reproducibility guidance
 - Roadmap for future evaluation improvements
 
 ## Example Use Cases
@@ -37,4 +37,4 @@ The initial focus is simple: make evaluation workflows more repeatable before ta
 
 ## Status
 
-Version 0.1 prototype focused on reproducible AI agent evaluation environments.
+Version 0.1 prototype exploring reproducible AI agent evaluation workflows using Docker Sandbox Kits.

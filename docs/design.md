@@ -30,7 +30,7 @@ The kit should focus on reproducibility, isolation, and repeatable evaluation wo
 
 ## Initial Scope
 
-The first version will focus on:
+Version 0.1 focuses on:
 
 * Evaluation-focused agent instructions
 * Reusable workflow templates

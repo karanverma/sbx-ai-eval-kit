@@ -16,6 +16,8 @@ Project foundation and design phase.
 * AGENTS.md evaluation guidance
 * Initial SBX mixin specification
 * Sample evaluation workflow
+* Worked baseline-versus-candidate evaluation example
+* Reproducibility guidance
 
 ### Goals
 
@@ -26,24 +28,21 @@ Project foundation and design phase.
 
 ## Version 0.2
 
-Evaluation workflow improvements.
-
-- Add an end-to-end reproducible agent evaluation example
-- Document fixed dependency strategy
-- Add simple artifact capture guidance
+Executable evaluation workflow.
 
 ### Planned
 
-* Example benchmark configurations
-* Improved agent guidance
-* Evaluation templates
-* Better documentation and usage examples
+* Convert the worked evaluation example into an executable workflow
+* Generate a structured evaluation artifact
+* Add a reusable evaluation configuration template
+* Document fixed dependency and artifact-capture strategies
 
 ### Success Criteria
 
-* Community review of workflow design
-* Feedback from Docker Captains
-* Identification of common evaluation use cases
+* One repeatable baseline-versus-candidate workflow
+* One machine-readable evaluation artifact
+* Clear distinction between illustrative and executed results
+* Initial technical feedback from SBX maintainers or Docker Captains
 
 
 ## Version 0.5

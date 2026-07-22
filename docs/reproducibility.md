@@ -33,4 +33,4 @@ These may be explored later after the basic reproducibility layer becomes more u
 
 ## Next Direction
 
-The next useful step is to add a small end-to-end evaluation example that compares a baseline and candidate agent output inside the same sandbox environment.
+The next useful step is to convert the worked baseline-versus-candidate example into a lightweight executable workflow that produces a structured evaluation artifact.

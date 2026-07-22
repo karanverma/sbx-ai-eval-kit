@@ -23,7 +23,8 @@ The initial focus is simple: make evaluation workflows more repeatable before ta
 
 - SBX Mixin Kit configuration
 - AGENTS.md evaluation guidance
-- Sample evaluation workflow
+- Sample evaluation workflow template
+- Worked baseline vs. candidate evaluation example
 - Reproducibility guidance
 - Roadmap for future evaluation improvements
 

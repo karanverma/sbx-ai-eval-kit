@@ -1,6 +1,6 @@
 # SBX AI Evaluation Kit
 
-A Docker Sandbox (SBX) Mixin Kit for reproducible AI agent evaluation workflows.
+A Docker Sandbox (SBX) Mixin Kit for building reproducible AI agent evaluation workflows.
 
 ## Motivation
 
@@ -21,12 +21,15 @@ The initial focus is simple: make evaluation workflows more repeatable before ta
 
 ## What This Kit Provides
 
-- SBX Mixin Kit configuration
-- AGENTS.md evaluation guidance
-- Sample evaluation workflow template
-- Worked baseline vs. candidate evaluation example
+- Structured evaluation configuration (`evaluation.yaml`)
+- Deterministic evaluation runner (`run_evaluation.py`)
+- Machine-readable evaluation artifact generation
+- Unit tests
+- GitHub Actions CI
+- Sample evaluation workflow
 - Reproducibility guidance
-- Roadmap for future evaluation improvements
+- `AGENTS.md` contributor guidance
+- Roadmap
 
 ## Example Use Cases
 
@@ -38,4 +41,18 @@ The initial focus is simple: make evaluation workflows more repeatable before ta
 
 ## Status
 
-Version 0.1 prototype exploring reproducible AI agent evaluation workflows using Docker Sandbox Kits.
+This repository is an executable prototype for deterministic evaluation workflows built around Docker Sandbox Kits.
+
+The current implementation includes a structured evaluation configuration, a deterministic evaluation runner, generated evaluation artifact, unit tests, and automated validation through GitHub Actions.
+
+The evaluation is intentionally illustrative. Future work will focus on supporting additional evaluation configurations and integrating with real Sandbox Kit validation workflows.
+
+## Quick Start
+
+```bash
+pip install -r requirements.txt
+python run_evaluation.py
+pytest
+```
+
+This generates `evaluation-result.json` and verifies the evaluation runner using the unit tests.

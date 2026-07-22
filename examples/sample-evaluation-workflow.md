@@ -2,9 +2,9 @@
 
 This example shows how the SBX AI Evaluation Kit can support a simple, repeatable evaluation workflow.
 
-## Goal
+For a worked example using this workflow, see [Example: Baseline vs Candidate Evaluation](./example-baseline-vs-candidate.md).
 
-Compare the behavior of a baseline AI system and a candidate AI system using the same task and evaluation criteria.
+## Goal
 
 ## Evaluation Steps
 

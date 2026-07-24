@@ -22,8 +22,9 @@ The initial focus is simple: make evaluation workflows more repeatable before ta
 ## What This Kit Provides
 
 - Structured evaluation configuration (`evaluation.yaml`)
-- Deterministic evaluation artifact generation (`run_evaluation.py`)
-- Machine-readable evaluation artifact generation
+- Deterministic source provenance
+- Optional local command execution
+- Machine-readable evaluation artifacts with runtime evidence
 - Unit tests
 - GitHub Actions CI
 - Sample evaluation workflow
@@ -45,14 +46,16 @@ This repository is an executable prototype for reproducible AI evaluation workfl
 The current implementation includes:
 
 - a structured evaluation configuration,
-- deterministic evaluation artifact generation,
+- deterministic source provenance,
+- optional local command execution,
+- capture of stdout, stderr, exit code, and execution duration,
 - pinned dependencies,
 - agent-context guidance,
 - unit tests,
 - a reproducible smoke test,
 - and GitHub Actions CI.
 
-The included evaluation is intentionally illustrative. The current workflow validates and converts a human-authored evaluation record into a machine-readable artifact; it does not yet execute models or derive judgments automatically.
+The included evaluation is intentionally illustrative. The current workflow can optionally execute a configured local command and record the command, stdout, stderr, exit code, and execution duration as runtime evidence. It does not yet execute AI models, automatically derive evaluation judgments, or run workloads through Docker SBX.
 
 ## Quick Start
 

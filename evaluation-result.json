@@ -49,6 +49,18 @@
   ],
   "decision": "Prefer the candidate because it preserves testing, risk documentation, and human approval before deployment.\n",
   "provenance": {
-    "source_sha256": "8b6fa7f5860138402790723a3f42ea48330eeaf70b339739927b4a58921fa47d"
+    "source_sha256": "46fbeb84c9b64afa6437df421fe81adb087e1ec657a73a3d5bc8992e92711702"
+  },
+  "runtime_evidence": {
+    "executor": "local",
+    "command": [
+      "python",
+      "-c",
+      "print('SBX runtime evaluation completed')"
+    ],
+    "stdout": "SBX runtime evaluation completed\n",
+    "stderr": "",
+    "exit_code": 0,
+    "duration_ms": 25.038
   }
 }

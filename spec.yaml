@@ -2,15 +2,36 @@ schemaVersion: "1"
 kind: mixin
 name: ai-eval
 displayName: AI Evaluation Kit
-description: Adds lightweight Python tooling and evaluation guidance for repeatable AI evaluation workflows.
+description: Adds lightweight tooling and guidance for reproducible AI evaluation workflows.
+
+network:
+  allowedDomains:
+    - pypi.org
+    - files.pythonhosted.org
 
 commands:
   install:
-    - command: "pip install -r requirements.txt"
+    - command: "python -m pip install --user pytest==8.3.4 PyYAML==6.0.2"
       user: "1000"
-      description: "Install lightweight evaluation tooling"
+      description: "Install pinned evaluation dependencies"
 
-  startup:
-    - command: ["sh", "-c", "cat AGENTS.md >> CLAUDE.md 2>/dev/null || true"]
-      user: "1000"
-      description: "Append AI evaluation guidance for compatible agents"
+agentContext: |
+  # AI Evaluation Workflow
+
+  Use explicit evaluation criteria and preserve evidence for every conclusion.
+
+  When working with this kit:
+
+  1. Record evaluation objectives, conditions, outputs, and observations.
+  2. Compare baseline and candidate systems under the same conditions.
+  3. Distinguish executed evidence from illustrative examples.
+  4. Document failures, uncertainty, limitations, and unexpected behavior.
+  5. Save machine-readable evaluation artifacts where possible.
+  6. Run the available evaluation workflow and tests before reporting completion.
+
+  For this repository:
+
+  - Run `python run_evaluation.py` to regenerate `evaluation-result.json`.
+  - Run `pytest` to validate the evaluation runner.
+  - Treat `evaluation.yaml` as a human-authored evaluation record.
+  - Do not describe the current illustrative comparison as an automated model evaluation.

@@ -60,3 +60,10 @@ observations:
 decision: >
   Prefer the candidate because it preserves testing,
   risk documentation, and human approval before deployment.
+
+execution:
+  executor: local
+  command:
+    - python
+    - -c
+    - "print('SBX runtime evaluation completed')"

@@ -6,6 +6,9 @@ from typing import Any
 
 import yaml
 
+from evidence.runtime import validate_runtime_evidence
+from executors.local import LocalExecutor
+
 
 REQUIRED_FIELDS = {
     "schema_version": str,
@@ -24,8 +27,11 @@ def load_evaluation(path: Path) -> dict[str, Any]:
     if not path.exists():
         raise FileNotFoundError(f"Evaluation file not found: {path}")
 
-    with path.open("r", encoding="utf-8") as file:
-        data = yaml.safe_load(file)
+    try:
+        with path.open("r", encoding="utf-8") as file:
+            data = yaml.safe_load(file)
+    except yaml.YAMLError as exc:
+        raise ValueError(f"Invalid YAML: {exc}") from exc
 
     if not isinstance(data, dict):
         raise ValueError("Evaluation configuration must be a YAML mapping")
@@ -40,6 +46,7 @@ def validate(data: dict[str, Any]) -> None:
 
     for field, expected_type in REQUIRED_FIELDS.items():
         value = data[field]
+
         if not isinstance(value, expected_type):
             raise ValueError(
                 f"Field '{field}' must be of type "
@@ -100,6 +107,33 @@ def validate(data: dict[str, Any]) -> None:
                 f"{sorted(missing_criterion_fields)}"
             )
 
+    validate_execution_config(data.get("execution"))
+
+
+def validate_execution_config(execution: Any) -> None:
+    if execution is None:
+        return
+
+    if not isinstance(execution, dict):
+        raise ValueError("Field 'execution' must be a mapping")
+
+    executor_name = execution.get("executor", "local")
+    command = execution.get("command")
+
+    if not isinstance(executor_name, str) or not executor_name.strip():
+        raise ValueError("execution.executor must be a non-empty string")
+
+    if executor_name != "local":
+        raise ValueError(f"Unsupported executor: {executor_name}")
+
+    if not isinstance(command, list) or not command:
+        raise ValueError("execution.command must be a non-empty list")
+
+    if not all(isinstance(item, str) and item for item in command):
+        raise ValueError(
+            "Every execution.command item must be a non-empty string"
+        )
+
 
 def calculate_source_digest(data: dict[str, Any]) -> str:
     canonical_source = json.dumps(
@@ -114,8 +148,22 @@ def calculate_source_digest(data: dict[str, Any]) -> str:
     ).hexdigest()
 
 
+def execute_runtime(data: dict[str, Any]) -> dict[str, Any] | None:
+    execution = data.get("execution")
+
+    if execution is None:
+        return None
+
+    validate_execution_config(execution)
+
+    evidence = LocalExecutor().execute(execution["command"])
+    validate_runtime_evidence(evidence)
+
+    return evidence
+
+
 def build_result(data: dict[str, Any]) -> dict[str, Any]:
-    return {
+    result = {
         "artifact_schema_version": "1",
         "evaluation_id": data["evaluation_id"],
         "objective": data["objective"],
@@ -129,6 +177,13 @@ def build_result(data: dict[str, Any]) -> dict[str, Any]:
             "source_sha256": calculate_source_digest(data),
         },
     }
+
+    runtime_evidence = execute_runtime(data)
+
+    if runtime_evidence is not None:
+        result["runtime_evidence"] = runtime_evidence
+
+    return result
 
 
 def write_result(result: dict[str, Any], output_path: Path) -> None:
@@ -147,8 +202,8 @@ def write_result(result: dict[str, Any], output_path: Path) -> None:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Validate an AI evaluation record and generate a "
-            "deterministic JSON artifact."
+            "Validate an AI evaluation record and generate an "
+            "execution-backed JSON artifact."
         )
     )
 

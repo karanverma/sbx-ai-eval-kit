@@ -22,13 +22,12 @@ The initial focus is simple: make evaluation workflows more repeatable before ta
 ## What This Kit Provides
 
 - Structured evaluation configuration (`evaluation.yaml`)
-- Deterministic evaluation runner (`run_evaluation.py`)
+- Deterministic evaluation artifact generation (`run_evaluation.py`)
 - Machine-readable evaluation artifact generation
 - Unit tests
 - GitHub Actions CI
 - Sample evaluation workflow
 - Reproducibility guidance
-- `AGENTS.md` contributor guidance
 - Roadmap
 
 ## Example Use Cases
@@ -41,18 +40,39 @@ The initial focus is simple: make evaluation workflows more repeatable before ta
 
 ## Status
 
-This repository is an executable prototype for deterministic evaluation workflows built around Docker Sandbox Kits.
+This repository is an executable prototype for reproducible AI evaluation workflows built around Docker Sandbox Kits.
 
-The current implementation includes a structured evaluation configuration, a deterministic evaluation runner, generated evaluation artifact, unit tests, and automated validation through GitHub Actions.
+The current implementation includes:
 
-The evaluation is intentionally illustrative. Future work will focus on supporting additional evaluation configurations and integrating with real Sandbox Kit validation workflows.
+- a structured evaluation configuration,
+- deterministic evaluation artifact generation,
+- pinned dependencies,
+- agent-context guidance,
+- unit tests,
+- a reproducible smoke test,
+- and GitHub Actions CI.
+
+The included evaluation is intentionally illustrative. The current workflow validates and converts a human-authored evaluation record into a machine-readable artifact; it does not yet execute models or derive judgments automatically.
 
 ## Quick Start
 
+Install dependencies:
+
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
+```
+
+Run the complete workflow:
+
+```bash
+./scripts/smoke-test.sh
+```
+
+Or run the steps individually:
+
+```bash
 python run_evaluation.py
 pytest
 ```
 
-This generates `evaluation-result.json` and verifies the evaluation runner using the unit tests.
+This regenerates `evaluation-result.json`, validates the generated artifact, and runs the unit tests.

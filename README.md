@@ -99,7 +99,7 @@ python run_evaluation.py
 pytest
 ```
 
-Example configuration:
+### Example execution configuration
 
 ```yaml
 execution:

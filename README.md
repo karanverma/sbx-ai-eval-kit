@@ -13,8 +13,8 @@ The initial focus is simple: make evaluation workflows more repeatable before ta
 ## Goals
 
 - Reproducible AI evaluation environments
-- Fixed dependencies for more consistent evaluation runs
-- Evaluation-focused agent instructions
+- Fixed dependencies to improve evaluation reproducibility
+- Evaluation-focused execution guidance
 - Repeatable baseline vs. candidate workflows
 - Clear documentation of observations, failures, and limitations
 - Support evaluation workflows informed by AI safety and governance practices
@@ -86,6 +86,8 @@ Install dependencies:
 python -m pip install -r requirements.txt
 ```
 
+The SBX executor requires the Docker Sandboxes (sbx) CLI. The local executor can be used without SBX installed.
+
 Run the complete workflow:
 
 ```bash
@@ -115,10 +117,15 @@ Produces runtime evidence:
 ```json
 {
   "executor": "sbx",
+  "command": [
+    "python3",
+    "-c",
+    "print(\"hello from sbx\")"
+  ],
   "stdout": "hello from sbx\n",
   "stderr": "",
   "exit_code": 0,
-  "duration_seconds": 0.12
+  "duration_ms": 120.0
 }
 ```
 

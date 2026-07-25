@@ -1,0 +1,52 @@
+evaluations:
+  - evaluation_id: evaluation-one
+    schema_version: "1"
+    objective: First suite evaluation
+    conditions:
+      - Same conditions
+    baseline:
+      name: baseline
+      output: Baseline output
+    candidate:
+      name: candidate
+      output: Candidate output
+    criteria:
+      - name: correctness
+        baseline: Acceptable
+        candidate: Better
+        assessment: candidate-preferred
+    observations:
+      - Candidate is better
+    decision: Prefer candidate
+    execution:
+      executor: local
+      command:
+        - python
+        - -c
+        - print("first")
+
+  - evaluation_id: evaluation-two
+    schema_version: "1"
+    objective: Second suite evaluation
+    conditions:
+      - Same conditions
+    baseline:
+      name: baseline
+      output: Baseline output
+    candidate:
+      name: candidate
+      output: Candidate output
+    criteria:
+      - name: correctness
+        baseline: Acceptable
+        candidate: Better
+        assessment: candidate-preferred
+    observations:
+      - Candidate is better
+    decision: Prefer candidate
+    execution:
+      executor: local
+      command:
+        - python
+        - -c
+        - print("second")

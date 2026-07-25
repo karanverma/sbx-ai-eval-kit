@@ -1,0 +1,96 @@
+{
+  "artifact_schema_version": "1",
+  "summary": {
+    "total": 2,
+    "successful": 2,
+    "failed": 0
+  },
+  "results": [
+    {
+      "artifact_schema_version": "1",
+      "evaluation_id": "evaluation-one",
+      "objective": "First suite evaluation",
+      "conditions": [
+        "Same conditions"
+      ],
+      "baseline": {
+        "name": "baseline",
+        "output": "Baseline output"
+      },
+      "candidate": {
+        "name": "candidate",
+        "output": "Candidate output"
+      },
+      "criteria": [
+        {
+          "name": "correctness",
+          "baseline": "Acceptable",
+          "candidate": "Better",
+          "assessment": "candidate-preferred"
+        }
+      ],
+      "observations": [
+        "Candidate is better"
+      ],
+      "decision": "Prefer candidate",
+      "provenance": {
+        "source_sha256": "4d96af9949b368d592135736301b6d56a285c9c20db8c52c2aaf4680ede61eb0"
+      },
+      "runtime_evidence": {
+        "executor": "local",
+        "command": [
+          "python",
+          "-c",
+          "print(\"first\")"
+        ],
+        "stdout": "first\n",
+        "stderr": "",
+        "exit_code": 0,
+        "duration_ms": 37.233
+      }
+    },
+    {
+      "artifact_schema_version": "1",
+      "evaluation_id": "evaluation-two",
+      "objective": "Second suite evaluation",
+      "conditions": [
+        "Same conditions"
+      ],
+      "baseline": {
+        "name": "baseline",
+        "output": "Baseline output"
+      },
+      "candidate": {
+        "name": "candidate",
+        "output": "Candidate output"
+      },
+      "criteria": [
+        {
+          "name": "correctness",
+          "baseline": "Acceptable",
+          "candidate": "Better",
+          "assessment": "candidate-preferred"
+        }
+      ],
+      "observations": [
+        "Candidate is better"
+      ],
+      "decision": "Prefer candidate",
+      "provenance": {
+        "source_sha256": "7459abdf5201a67c36b2c5390d85973be01ebea6b21fdb73b4a1f4efc419be17"
+      },
+      "runtime_evidence": {
+        "executor": "local",
+        "command": [
+          "python",
+          "-c",
+          "print(\"second\")"
+        ],
+        "stdout": "second\n",
+        "stderr": "",
+        "exit_code": 0,
+        "duration_ms": 24.146
+      }
+    }
+  ]
+}

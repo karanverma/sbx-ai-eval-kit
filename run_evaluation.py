@@ -148,6 +148,24 @@ def calculate_source_digest(data: dict[str, Any]) -> str:
     ).hexdigest()
 
 
+def validate_suite_config(data: dict[str, Any]) -> None:
+    if "evaluations" not in data:
+        raise ValueError("Suite configuration must contain 'evaluations'")
+
+    evaluations = data["evaluations"]
+
+    if not isinstance(evaluations, list):
+        raise ValueError("Field 'evaluations' must be a list")
+
+    for index, evaluation in enumerate(evaluations):
+        if not isinstance(evaluation, dict):
+            raise ValueError(
+                f"Suite evaluation at index {index} must be a mapping"
+            )
+
+        validate(evaluation)
+
+
 def execute_runtime(data: dict[str, Any]) -> dict[str, Any] | None:
     execution = data.get("execution")
 
@@ -188,6 +206,37 @@ def build_result(data: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
+def build_suite_result(data: dict[str, Any]) -> dict[str, Any]:
+    validate_suite_config(data)
+
+    results: list[dict[str, Any]] = []
+    successful = 0
+    failed = 0
+
+    for evaluation in data["evaluations"]:
+        result = build_result(evaluation)
+        results.append(result)
+
+        runtime_evidence = result.get("runtime_evidence")
+
+        if runtime_evidence is None:
+            successful += 1
+        elif runtime_evidence.get("exit_code") == 0:
+            successful += 1
+        else:
+            failed += 1
+
+    return {
+        "artifact_schema_version": "1",
+        "summary": {
+            "total": len(results),
+            "successful": successful,
+            "failed": failed,
+        },
+        "results": results,
+    }
+
+
 def write_result(result: dict[str, Any], output_path: Path) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -210,16 +259,25 @@ def parse_args() -> argparse.Namespace:
     )
 
     parser.add_argument(
-        "--input",
+        "input_path",
+        nargs="?",
         type=Path,
-        default=Path("evaluation.yaml"),
+        default=None,
+        help="Path to the evaluation YAML file",
+    )
+
+    parser.add_argument(
+        "--input",
+        dest="input_option",
+        type=Path,
+        default=None,
         help="Path to the evaluation YAML file",
     )
 
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("evaluation-result.json"),
+        default=None,
         help="Path for the generated JSON artifact",
     )
 
@@ -229,13 +287,21 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
 
-    data = load_evaluation(args.input)
-    validate(data)
+    input_path = args.input_option or args.input_path or Path("evaluation.yaml")
+    output_path = args.output or Path("evaluation-result.json")
 
-    result = build_result(data)
-    write_result(result, args.output)
+    data = load_evaluation(input_path)
 
-    print(f"{args.output} created")
+    if "evaluations" in data:
+        result = build_suite_result(data)
+        output_path = args.output or Path("evaluation-results.json")
+    else:
+        validate(data)
+        result = build_result(data)
+
+    write_result(result, output_path)
+
+    print(f"{output_path} created")
 
 
 if __name__ == "__main__":

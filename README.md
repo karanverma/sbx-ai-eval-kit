@@ -130,3 +130,23 @@ Produces runtime evidence:
 ```
 
 This regenerates `evaluation-result.json`, validates the generated artifact, and runs the unit tests.
+
+## Evaluation Suites
+
+You can also run multiple evaluations as a suite by placing a top-level `evaluations` list in a YAML file and using the same evaluation structure for each item:
+
+```yaml
+evaluations:
+  - evaluation_id: evaluation-one
+    ...
+  - evaluation_id: evaluation-two
+    ...
+```
+
+Run a suite with:
+
+```bash
+python run_evaluation.py evaluation-suite.yaml
+```
+
+This writes `evaluation-results.json` with a top-level summary plus the complete individual evaluation artifacts for each result.

@@ -7,7 +7,7 @@ from typing import Any
 import yaml
 
 from evidence.runtime import validate_runtime_evidence
-from executors.local import LocalExecutor
+from executors.factory import get_executor
 
 
 REQUIRED_FIELDS = {
@@ -123,7 +123,7 @@ def validate_execution_config(execution: Any) -> None:
     if not isinstance(executor_name, str) or not executor_name.strip():
         raise ValueError("execution.executor must be a non-empty string")
 
-    if executor_name != "local":
+    if executor_name not in {"local", "sbx"}:
         raise ValueError(f"Unsupported executor: {executor_name}")
 
     if not isinstance(command, list) or not command:
@@ -156,7 +156,9 @@ def execute_runtime(data: dict[str, Any]) -> dict[str, Any] | None:
 
     validate_execution_config(execution)
 
-    evidence = LocalExecutor().execute(execution["command"])
+    evidence = get_executor(execution.get("executor", "local")).execute(
+        execution["command"]
+    )
     validate_runtime_evidence(evidence)
 
     return evidence

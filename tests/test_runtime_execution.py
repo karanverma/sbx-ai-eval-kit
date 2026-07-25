@@ -104,7 +104,7 @@ def test_invalid_execution_command_is_rejected() -> None:
 def test_unsupported_executor_is_rejected() -> None:
     evaluation = valid_evaluation()
     evaluation["execution"] = {
-        "executor": "sbx",
+        "executor": "docker",
         "command": ["echo", "test"],
     }
 

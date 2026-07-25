@@ -23,7 +23,7 @@ The initial focus is simple: make evaluation workflows more repeatable before ta
 
 - Structured evaluation configuration (`evaluation.yaml`)
 - Deterministic source provenance
-- Optional local command execution
+- Optional local or Docker Sandboxes (SBX) command execution
 - Machine-readable evaluation artifacts with runtime evidence
 - Unit tests
 - GitHub Actions CI
@@ -47,7 +47,7 @@ The current implementation includes:
 
 - a structured evaluation configuration,
 - deterministic source provenance,
-- optional local command execution,
+- optional local or Docker Sandboxes (SBX) command execution,
 - capture of stdout, stderr, exit code, and execution duration,
 - pinned dependencies,
 - agent-context guidance,
@@ -55,7 +55,7 @@ The current implementation includes:
 - a reproducible smoke test,
 - and GitHub Actions CI.
 
-The included evaluation is intentionally illustrative. The current workflow can optionally execute a configured local command and record the command, stdout, stderr, exit code, and execution duration as runtime evidence. It does not yet execute AI models, automatically derive evaluation judgments, or run workloads through Docker SBX.
+The included evaluation is intentionally illustrative and is designed to demonstrate the evaluation workflow. The current workflow can execute a configured command using either the local executor or Docker Sandboxes (SBX) and records the command, stdout, stderr, exit code, and execution duration as runtime evidence. It does not yet execute AI models or automatically derive evaluation judgments.
 
 ## Quick Start
 
@@ -76,6 +76,17 @@ Or run the steps individually:
 ```bash
 python run_evaluation.py
 pytest
+```
+
+Example `evaluation.yaml`:
+
+```yaml
+execution:
+  executor: sbx
+  command:
+    - python3
+    - -c
+    - print("hello from sbx")
 ```
 
 This regenerates `evaluation-result.json`, validates the generated artifact, and runs the unit tests.

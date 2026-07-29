@@ -33,7 +33,7 @@ The initial focus is simple: make evaluation workflows more repeatable before ta
 
 ## Why Docker Sandboxes?
 
-Running evaluations inside Docker Sandboxes provides stronger isolation and more reproducible execution than relying solely on the host environment.
+Running evaluations inside [Docker Sandboxes (SBX)](https://docs.docker.com/ai/sandboxes/) provides stronger isolation and more reproducible execution than relying solely on the host environment.
 
 The SBX executor helps reduce variability caused by differences in local dependencies, tooling, and machine configuration while preserving structured runtime evidence for each evaluation run.
 

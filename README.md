@@ -62,7 +62,7 @@ Both executors return the same runtime evidence structure, allowing evaluation a
 
 ## Status
 
-This repository is an executable prototype for reproducible AI evaluation workflows built around Docker Sandboxes (SBX).
+This repository is an executable implementation for reproducible AI evaluation workflows built around Docker Sandboxes (SBX).
 
 The current implementation includes:
 

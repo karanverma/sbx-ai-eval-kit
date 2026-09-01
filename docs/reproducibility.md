@@ -31,6 +31,18 @@ This project does not yet provide:
 
 These may be explored later after the basic reproducibility layer becomes more useful.
 
+## Current State
+
+The workflow now supports executable evaluations using either the local
+executor or Docker Sandboxes (SBX). Each executed evaluation records structured
+runtime evidence including the command, stdout, stderr, exit code, and execution
+duration.
+
+Evaluation suites extend the same workflow across multiple evaluation
+definitions while producing individual results and an aggregated summary.
+
 ## Next Direction
 
-The next useful step is to convert the worked baseline-versus-candidate example into a lightweight executable workflow that produces a structured evaluation artifact.
+A useful next step is reproducibility verification: rerunning a previous
+evaluation under comparable conditions and identifying meaningful execution
+drift between runs.
